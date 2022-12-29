@@ -41,3 +41,7 @@ func InitDb() {
 	}
 	fmt.Println("Database migrated")
 }
+
+func GetDb() *gorm.DB {
+	return db
+}

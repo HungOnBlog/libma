@@ -2,7 +2,11 @@ module github.com/HungOnBlog/libma
 
 go 1.19
 
-require github.com/gofiber/fiber/v2 v2.40.1
+require (
+	github.com/gofiber/fiber/v2 v2.40.1
+	gorm.io/driver/postgres v1.4.5
+	gorm.io/gorm v1.24.2
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
@@ -27,6 +31,4 @@ require (
 	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
 	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gorm.io/driver/postgres v1.4.5 // indirect
-	gorm.io/gorm v1.24.2 // indirect
 )
