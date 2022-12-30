@@ -37,11 +37,23 @@ func (controller *BorrowerController) ApplyController(router fiber.Router) {
 }
 
 func (controller *BorrowerController) GetBorrowers(c *fiber.Ctx) error {
-	return c.SendString("GetBorrowers")
+	borrowers, err := borrowerService.GetAllBorrowers()
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(borrowers)
 }
 
 func (controller *BorrowerController) GetBorrowerById(c *fiber.Ctx) error {
-	return c.SendString("GetBorrowerById")
+	id := c.Params("id")
+
+	borrower, err := borrowerService.GetBorrowerById(id)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(borrower)
 }
 
 func (controller *BorrowerController) CreateBorrower(c *fiber.Ctx) error {
@@ -59,13 +71,42 @@ func (controller *BorrowerController) CreateBorrower(c *fiber.Ctx) error {
 }
 
 func (controller *BorrowerController) UpdateBorrower(c *fiber.Ctx) error {
-	return c.SendString("UpdateBorrower")
+	id := c.Params("id")
+
+	dto := new(BorrowerUpdateDto)
+	if err := c.BodyParser(dto); err != nil {
+		return err
+	}
+
+	borrower, err := borrowerService.UpdateBorrower(id, dto)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(borrower)
 }
 
 func (controller *BorrowerController) DeleteBorrower(c *fiber.Ctx) error {
-	return c.SendString("DeleteBorrower")
+	id := c.Params("id")
+
+	err := borrowerService.DeleteBorrower(id)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(fiber.Map{"message": "Borrower deleted"})
 }
 
 func (controller *BorrowerController) Login(c *fiber.Ctx) error {
-	return c.SendString("Login")
+	dto := new(BorrowerLoginDto)
+	if err := c.BodyParser(dto); err != nil {
+		return err
+	}
+
+	err := borrowerService.Login(dto)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(fiber.Map{"message": "Login successful"})
 }

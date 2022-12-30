@@ -38,3 +38,29 @@ func (repo *BorrowerRepo) AutoMigrate() error {
 func (repo *BorrowerRepo) Create(borrower *models.Borrower) error {
 	return repo.Db.Create(borrower).Error
 }
+
+func (repo *BorrowerRepo) FindById(id string) (*models.Borrower, error) {
+	borrower := &models.Borrower{}
+	err := repo.Db.Where("id = ?", id).First(borrower).Error
+	return borrower, err
+}
+
+func (repo *BorrowerRepo) FindByEmail(email string) (*models.Borrower, error) {
+	borrower := &models.Borrower{}
+	err := repo.Db.Where("email = ?", email).First(borrower).Error
+	return borrower, err
+}
+
+func (repo *BorrowerRepo) FindAll() ([]*models.Borrower, error) {
+	borrowers := []*models.Borrower{}
+	err := repo.Db.Find(&borrowers).Error
+	return borrowers, err
+}
+
+func (repo *BorrowerRepo) Update(borrower *models.Borrower) error {
+	return repo.Db.Model(&models.Borrower{}).Where("id = ?", borrower.Id).Updates(borrower).Error
+}
+
+func (repo *BorrowerRepo) DeleteById(id string) error {
+	return repo.Db.Where("id = ?", id).Delete(&models.Borrower{}).Error
+}

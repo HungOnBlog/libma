@@ -20,6 +20,12 @@ var LibmaErrors = map[string]LibmaError{
 
 	// Borrower
 	// Detail code (code) of borrower errors is in range xxx100 - xxx199
+	// Borrower errors -- 403100 - 403199
+	"BorrowerLoginFailed": {
+		Status: 403,
+		Msg:    "Borrower login failed. Email and password do not match or borrower does not exist",
+		Code:   403100,
+	},
 	// Borrower errors -- 404100 - 404199
 	"BorrowerNotFound": {
 		Status: 404,
@@ -37,6 +43,16 @@ var LibmaErrors = map[string]LibmaError{
 		Status: 400,
 		Msg:    "Invalid borrower creation info. Please check 'name', 'email' and 'password' fields",
 		Code:   400100,
+	},
+	"InvalidBorrowerUpdateInfo": {
+		Status: 400,
+		Msg:    "Invalid borrower update info. Please check 'name', 'email' and 'password' fields",
+		Code:   400101,
+	},
+	"InvalidBorrowerLoginInfo": {
+		Status: 400,
+		Msg:    "Invalid borrower login info. Please check 'email' and 'password' fields",
+		Code:   400102,
 	},
 }
 
