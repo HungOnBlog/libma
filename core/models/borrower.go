@@ -14,9 +14,9 @@ type Borrower struct {
 	Email         string         `json:"email" gorm:"not null;unique"`
 	Password      string         `json:"password" gorm:"not null"`
 	BorrowedBooks []*Book        `json:"borrowed_books" gorm:"foreignKey:BorrowedBy;references:Id"`
-	CreatedAt     time.Time      `json:"created_at" gorm:"autoCreateTime"`
-	UpdatedAt     time.Time      `json:"updated_at" gorm:"autoUpdateTime"`
-	DeletedAt     gorm.DeletedAt `json:"deleted_at" gorm:"index"`
+	CreatedAt     time.Time      `json:"created_at" gorm:"autoCreateTime" swaggerignore:"true"`
+	UpdatedAt     time.Time      `json:"updated_at" gorm:"autoUpdateTime" swaggerignore:"true"`
+	DeletedAt     gorm.DeletedAt `json:"deleted_at" gorm:"index" swaggerignore:"true"`
 }
 
 func (b *Borrower) Value() (driver.Value, error) {

@@ -1,15 +1,155 @@
-basePath: /
-host: localhost:8000
+definitions:
+  borrowers.BorrowerDto:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+  borrowers.BorrowerLoginDto:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  borrowers.BorrowerUpdateDto:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
 info:
-  contact:
-    email: fiber@swagger.io
-    name: API Support
-  description: This is API specification for Libma
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
-  title: Libma API Specification
-  version: "1.0"
-paths: {}
+  contact: {}
+paths:
+  /borrowers:
+    get:
+      consumes:
+      - application/json
+      description: Return all borrowers (active) in the system
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/borrowers.BorrowerDto'
+            type: array
+      summary: Get all borrowers
+      tags:
+      - borrowers
+    post:
+      consumes:
+      - application/json
+      description: Create borrower
+      parameters:
+      - description: Borrower
+        in: body
+        name: borrower
+        required: true
+        schema:
+          $ref: '#/definitions/borrowers.BorrowerDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/borrowers.BorrowerDto'
+      summary: Create borrower
+      tags:
+      - borrowers
+  /borrowers/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete borrower
+      parameters:
+      - description: Borrower id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete borrower
+      tags:
+      - borrowers
+    get:
+      consumes:
+      - application/json
+      description: Return borrower by id
+      parameters:
+      - description: Borrower id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/borrowers.BorrowerDto'
+      summary: Get borrower by id
+      tags:
+      - borrowers
+    put:
+      consumes:
+      - application/json
+      description: Update borrower
+      parameters:
+      - description: Borrower id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Borrower
+        in: body
+        name: borrower
+        required: true
+        schema:
+          $ref: '#/definitions/borrowers.BorrowerUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/borrowers.BorrowerDto'
+      summary: Update borrower
+      tags:
+      - borrowers
+  /borrowers/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Borrower
+        in: body
+        name: borrower
+        required: true
+        schema:
+          $ref: '#/definitions/borrowers.BorrowerLoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/borrowers.BorrowerDto'
+      summary: Login
+      tags:
+      - borrowers
 swagger: "2.0"
