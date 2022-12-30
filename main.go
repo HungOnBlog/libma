@@ -26,9 +26,9 @@ func main() {
 
 	app := fiber.New(fiber.Config{
 		Prefork:       os.Getenv("PREFORK") == "true",
-		StrictRouting: true,
 		CaseSensitive: true,
 		AppName:       "Libma",
+		ErrorHandler:  core.CustomLibmaErrorHandler,
 	})
 
 	// Middleware
@@ -36,11 +36,11 @@ func main() {
 
 	apiV1 := app.Group("v1")
 
-	// Swagger
-	swagger.ApplySwaggerController(apiV1)
-
 	// Controller
 	core.ApplyController(apiV1, &borrowers.BorrowerController{})
+
+	// Swagger
+	swagger.ApplySwaggerController(apiV1)
 
 	app.Listen(":" + os.Getenv("PORT"))
 }
