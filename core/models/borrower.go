@@ -9,13 +9,14 @@ import (
 )
 
 type Borrower struct {
-	Id          string         `json:"id" gorm:"primaryKey"`
-	Name        string         `json:"name" gorm:"not null;index"`
-	Email       string         `json:"email" gorm:"not null;index"`
-	BorrowBooks []*Book        `json:"borrow_books" gorm:"foreignKey:BorrowedBy;references:Id;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	CreatedAt   time.Time      `json:"created_at" gorm:"autoCreateTime"`
-	UpdatedAt   time.Time      `json:"updated_at" gorm:"autoUpdateTime"`
-	DeletedAt   gorm.DeletedAt `json:"deleted_at" gorm:"index"`
+	Id            string         `json:"id" gorm:"primaryKey"`
+	Name          string         `json:"name" gorm:"not null;unique"`
+	Email         string         `json:"email" gorm:"not null;unique"`
+	Password      string         `json:"password" gorm:"not null"`
+	BorrowedBooks []*Book        `json:"borrowed_books" gorm:"foreignKey:BorrowedBy;references:Id"`
+	CreatedAt     time.Time      `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt     time.Time      `json:"updated_at" gorm:"autoUpdateTime"`
+	DeletedAt     gorm.DeletedAt `json:"deleted_at" gorm:"index"`
 }
 
 func (b *Borrower) Value() (driver.Value, error) {

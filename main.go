@@ -3,7 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/HungOnBlog/libma/infra/db"
+	"github.com/HungOnBlog/libma/app/borrowers"
+	"github.com/HungOnBlog/libma/core"
 	"github.com/HungOnBlog/libma/infra/swagger"
 	"github.com/gofiber/fiber/v2"
 )
@@ -19,16 +20,27 @@ import (
 // @host localhost:8000
 // @BasePath /
 func main() {
-	db.InitDb()
-	app := fiber.New()
+	core.AutoMigrate(
+		borrowers.GetBorrowerRepo(),
+	)
+
+	app := fiber.New(fiber.Config{
+		Prefork:       os.Getenv("PREFORK") == "true",
+		StrictRouting: true,
+		CaseSensitive: true,
+		AppName:       "Libma",
+	})
+
+	// Middleware
+	core.ApplyMiddleware(app)
 
 	apiV1 := app.Group("v1")
 
+	// Swagger
 	swagger.ApplySwaggerController(apiV1)
 
-	apiV1.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	// Controller
+	core.ApplyController(apiV1, &borrowers.BorrowerController{})
 
 	app.Listen(":" + os.Getenv("PORT"))
 }

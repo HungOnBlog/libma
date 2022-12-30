@@ -17,6 +17,7 @@ require (
 	github.com/go-openapi/jsonreference v0.20.0 // indirect
 	github.com/go-openapi/spec v0.20.7 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.13.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
@@ -29,11 +30,14 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.13 // indirect
+	github.com/kr/pretty v0.3.0 // indirect
+	github.com/lithammer/shortuuid/v4 v4.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/rivo/uniseg v0.4.3 // indirect
+	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/swaggo/files v1.0.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.43.0 // indirect
