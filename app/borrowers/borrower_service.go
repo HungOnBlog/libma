@@ -1,9 +1,11 @@
 package borrowers
 
 import (
+	"errors"
+	"strings"
+
 	"github.com/HungOnBlog/libma/core/gen"
 	"github.com/HungOnBlog/libma/core/models"
-	"github.com/HungOnBlog/libma/infra/db"
 )
 
 type BorrowerService struct {
@@ -17,9 +19,9 @@ func NewBorrowerService() *BorrowerService {
 }
 
 func (service *BorrowerService) CreateBorrower(dto *BorrowerDto) (*BorrowerGetDto, error) {
-	dbClient := db.GetDb()
-	if dbClient == nil {
-		return &BorrowerGetDto{}, nil
+
+	if !IsCreateDtoValid(dto) {
+		return &BorrowerGetDto{}, errors.New("InvalidBorrowerCreationInfo")
 	}
 
 	borrower := &models.Borrower{
@@ -31,6 +33,9 @@ func (service *BorrowerService) CreateBorrower(dto *BorrowerDto) (*BorrowerGetDt
 
 	err := service.repo.Create(borrower)
 	if err != nil {
+		if strings.Contains(err.Error(), "duplicate") {
+			return &BorrowerGetDto{}, errors.New("BorrowerAlreadyExists")
+		}
 		return &BorrowerGetDto{}, err
 	}
 

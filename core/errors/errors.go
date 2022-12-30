@@ -17,6 +17,27 @@ var LibmaErrors = map[string]LibmaError{
 		Msg:    "Internal Server Error",
 		Code:   500000,
 	},
+
+	// Borrower
+	// Detail code (code) of borrower errors is in range xxx100 - xxx199
+	// Borrower errors -- 404100 - 404199
+	"BorrowerNotFound": {
+		Status: 404,
+		Msg:    "Borrower not found",
+		Code:   404100,
+	},
+	// Borrower errors -- 409100 - 409199
+	"BorrowerAlreadyExists": {
+		Status: 409,
+		Msg:    "Borrower (using this name or email) already exists. Please try again with another name or email",
+		Code:   409100,
+	},
+	// Borrower errors -- 400100 - 400199
+	"InvalidBorrowerCreationInfo": {
+		Status: 400,
+		Msg:    "Invalid borrower creation info. Please check 'name', 'email' and 'password' fields",
+		Code:   400100,
+	},
 }
 
 func GetLibmaError(err string) LibmaError {
