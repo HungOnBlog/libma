@@ -10,8 +10,8 @@ import (
 
 type Librarian struct {
 	Id        string         `json:"id" gorm:"primaryKey"`
-	Name      string         `json:"name" gorm:"not null;index"`
-	Email     string         `json:"email" gorm:"not null;index"`
+	Name      string         `json:"name" gorm:"unique;not null;index"`
+	Email     string         `json:"email" gorm:"unique;not null;index"`
 	Password  string         `json:"password" gorm:"not null"`
 	CreatedAt time.Time      `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt time.Time      `json:"updated_at" gorm:"autoUpdateTime"`

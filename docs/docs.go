@@ -201,6 +201,185 @@ const docTemplate = `{
                 ],
                 "responses": {}
             }
+        },
+        "/librarians": {
+            "get": {
+                "description": "Return all librarians (active) in the system",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Get all librarians",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/librarian.LibrarianDto"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new librarian",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Create librarian",
+                "parameters": [
+                    {
+                        "description": "Librarian",
+                        "name": "librarian",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarians/login": {
+            "post": {
+                "description": "Login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "Librarian",
+                        "name": "librarian",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianLoginDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarians/{id}": {
+            "get": {
+                "description": "Return librarian by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Get librarian by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Librarian id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "description": "Update librarian",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Update librarian",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Librarian id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Librarian",
+                        "name": "librarian",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/librarian.LibrarianDto"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete librarian",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "librarians"
+                ],
+                "summary": "Delete librarian",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Librarian id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
         }
     },
     "definitions": {
@@ -239,6 +418,31 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "librarian.LibrarianDto": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "librarian.LibrarianLoginDto": {
+            "type": "object",
+            "properties": {
+                "email": {
                     "type": "string"
                 },
                 "password": {

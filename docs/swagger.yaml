@@ -26,6 +26,22 @@ definitions:
       password:
         type: string
     type: object
+  librarian.LibrarianDto:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  librarian.LibrarianLoginDto:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -152,4 +168,123 @@ paths:
       summary: Login
       tags:
       - borrowers
+  /librarians:
+    get:
+      consumes:
+      - application/json
+      description: Return all librarians (active) in the system
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/librarian.LibrarianDto'
+            type: array
+      summary: Get all librarians
+      tags:
+      - librarians
+    post:
+      consumes:
+      - application/json
+      description: Create new librarian
+      parameters:
+      - description: Librarian
+        in: body
+        name: librarian
+        required: true
+        schema:
+          $ref: '#/definitions/librarian.LibrarianDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/librarian.LibrarianDto'
+      summary: Create librarian
+      tags:
+      - librarians
+  /librarians/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete librarian
+      parameters:
+      - description: Librarian id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete librarian
+      tags:
+      - librarians
+    get:
+      consumes:
+      - application/json
+      description: Return librarian by id
+      parameters:
+      - description: Librarian id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get librarian by id
+      tags:
+      - librarians
+    put:
+      consumes:
+      - application/json
+      description: Update librarian
+      parameters:
+      - description: Librarian id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Librarian
+        in: body
+        name: librarian
+        required: true
+        schema:
+          $ref: '#/definitions/librarian.LibrarianDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/librarian.LibrarianDto'
+      summary: Update librarian
+      tags:
+      - librarians
+  /librarians/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Librarian
+        in: body
+        name: librarian
+        required: true
+        schema:
+          $ref: '#/definitions/librarian.LibrarianLoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/librarian.LibrarianDto'
+      summary: Login
+      tags:
+      - librarians
 swagger: "2.0"

@@ -1,8 +1,8 @@
-package borrowers
+package librarians
 
 import "github.com/HungOnBlog/libma/core/validators"
 
-func IsCreateDtoValid(dto *BorrowerDto) bool {
+func IsLibrarianCreateDtoValid(dto *LibrarianCreateDto) bool {
 	if !(dto.Name != "" && dto.Email != "" && dto.Password != "") {
 		return false
 	}
@@ -14,7 +14,7 @@ func IsCreateDtoValid(dto *BorrowerDto) bool {
 	return true
 }
 
-func IsUpdateDtoValid(dto *BorrowerUpdateDto) bool {
+func IsLibrarianUpdateDtoValid(dto *LibrarianUpdateDto) bool {
 	if !(dto.Name != "" && dto.Email != "") {
 		return false
 	}
@@ -26,7 +26,7 @@ func IsUpdateDtoValid(dto *BorrowerUpdateDto) bool {
 	return true
 }
 
-func IsLoginDtoValid(dto *BorrowerLoginDto) bool {
+func IsLibrarianLoginDtoValid(dto *LibrarianLoginDto) bool {
 	if !(dto.Email != "" && dto.Password != "") {
 		return false
 	}

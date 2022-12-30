@@ -54,6 +54,43 @@ var LibmaErrors = map[string]LibmaError{
 		Msg:    "Invalid borrower login info. Please check 'email' and 'password' fields",
 		Code:   400102,
 	},
+
+	// Librarian
+	// Detail code (code) of librarian errors is in range xxx200 - xxx299
+	// Librarian errors -- 403200 - 403299
+	"LibrarianLoginFailed": {
+		Status: 403,
+		Msg:    "Librarian login failed. Email and password do not match or librarian does not exist",
+		Code:   403200,
+	},
+	// Librarian errors -- 404200 - 404299
+	"LibrarianNotFound": {
+		Status: 404,
+		Msg:    "Librarian not found",
+		Code:   404200,
+	},
+	// Librarian errors -- 409200 - 409299
+	"LibrarianAlreadyExists": {
+		Status: 409,
+		Msg:    "Librarian (using this name or email) already exists. Please try again with another name or email",
+		Code:   409200,
+	},
+	// Librarian errors -- 400200 - 400299
+	"InvalidLibrarianCreationInfo": {
+		Status: 400,
+		Msg:    "Invalid librarian creation info. Please check 'name', 'email' and 'password' fields",
+		Code:   400200,
+	},
+	"InvalidLibrarianUpdateInfo": {
+		Status: 400,
+		Msg:    "Invalid librarian update info. Please check 'name', 'email' and 'password' fields",
+		Code:   400201,
+	},
+	"InvalidLibrarianLoginInfo": {
+		Status: 400,
+		Msg:    "Invalid librarian login info. Please check 'email' and 'password' fields",
+		Code:   400202,
+	},
 }
 
 func GetLibmaError(err string) LibmaError {
